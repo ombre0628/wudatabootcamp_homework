@@ -4,43 +4,7 @@ import pandas as pd
 import datetime as dt
 import requests
 
-def scrape_all():
-    # Initiate headless driver for deployment
-    browser = Browser("chrome", executable_path = "/usr/local/bin/chromedriver", headless=True)
 
-    # 1. mars_news
-    news_title, news_p = mars_news(browser)    
-    # print(news_title)
-    # print(news_p)
-
-    # 2. featured_image
-    featured_image_url = featured_image(browser)
-    # print(featured_image_url)
-
-    # 3. hemispheres
-    hemisphere_image_urls = hemispheres()
-    # print(hemisphere_image_urls)
-
-    # 4. mars_weather
-    mars_weather = twitter_weather()
-    # print(mars_weather)
-
-    # 5. mars_facts
-    mars_facts_table = mars_facts()
-    # print(mars_facts_table)
-
-    # Stop webdriver and return data
-    browser.quit()
-    # return data
-    final_data = {
-        'news_title': news_title,
-        'news_p': news_p,
-        'featured_image_url': featured_image_url, 
-        'hemisphere_image_urls': hemisphere_image_urls, 
-        'mars_weather': mars_weather, 
-        'mars_facts': mars_facts_table
-    }
-    return final_data
 
 def mars_news(browser):   
     # use selenium control google chromedriver
@@ -134,8 +98,45 @@ def mars_facts():
     tables.set_index('description', inplace=True)
     # html_table = tables.to_html()
     return tables.to_html()
+def scrape_all():
+    # Initiate headless driver for deployment
+    browser = Browser("chrome", executable_path = "/usr/local/bin/chromedriver", headless=True)
+
+    # 1. mars_news
+    news_title, news_p = mars_news(browser)    
+    # print(news_title)
+    # print(news_p)
+
+    # 2. featured_image
+    featured_image_url = featured_image(browser)
+    # print(featured_image_url)
+
+    # 3. hemispheres
+    hemisphere_image_urls = hemispheres()
+    # print(hemisphere_image_urls)
+
+    # 4. mars_weather
+    mars_weather = twitter_weather()
+    # print(mars_weather)
+
+    # 5. mars_facts
+    mars_facts_table = mars_facts()
+    # print(mars_facts_table)
+
+    # Stop webdriver and return data
+    browser.quit()
+    # return data
+    final_data = {
+        'news_title': news_title,
+        'news_p': news_p,
+        'featured_image_url': featured_image_url, 
+        'hemisphere_image_urls': hemisphere_image_urls, 
+        'mars_weather': mars_weather, 
+        'mars_facts': mars_facts_table
+    }
+    return final_data
 
 
 if __name__ == "__main__":
     # If running as script, print scraped data
-    print(scrape_all())
+    pdscrape_all()

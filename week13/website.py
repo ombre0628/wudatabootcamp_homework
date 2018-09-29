@@ -23,9 +23,10 @@ def index():
 
 @app.route('/scrape')
 def scraper():
+    marsinfo_data = scrape_mars.scrape_all()
     print('scraper start')
     marsinfo = mongo.db.marsinfo
-    marsinfo_data = scrape_mars.scrape_all()
+   
     #time.sleep(30)
     print(marsinfo_data)
     marsinfo.update({}, marsinfo_data, upsert=True)
