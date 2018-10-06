@@ -1,0 +1,1 @@
+FLASK_APP=belly-button-biodiversity-hw15/app.py flask run
